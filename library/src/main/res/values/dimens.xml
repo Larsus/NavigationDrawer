@@ -1,0 +1,17 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nvgd_drawer_width">260dp</dimen>
+
+    <dimen name="nvgd_keyline_1">16dp</dimen>
+    <dimen name="nvgd_keyline_2">72dp</dimen>
+    <dimen name="nvgd_keyline_2_minus_16dp_minus_img_width">32dp</dimen>
+
+    <dimen name="nvgd_item_height">48dp</dimen>
+    <dimen name="nvgd_item_separator_height">16dp</dimen>
+    <dimen name="nvgd_item_header_height">56dp</dimen>
+
+    <dimen name="nvgd_item_img_height">24dp</dimen>
+    <dimen name="nvgd_item_img_width">24dp</dimen>
+
+    <dimen name="nvgd_default_textSize">14sp</dimen>
+</resources>

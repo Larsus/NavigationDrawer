@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nvgd_item_separator_height">
+
+    <View
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:gravity="start|center_vertical"
+        android:background="@color/nvgd_gray" />
+
+</LinearLayout>

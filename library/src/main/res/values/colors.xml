@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nvgd_drawer">#FFFFFF</color>
+    <color name="nvgd_transparent">#00000000</color>
+    <color name="nvgd_gray">#E0E0E0</color>
+    <color name="nvgd_black">#000000</color>
+    <color name="nvgd_white">#ffffff</color>
+</resources>

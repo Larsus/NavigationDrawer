@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nvgd_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <ListView
+        android:id="@+id/nvgd_drawer_items_list"
+        android:choiceMode="singleChoice"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        android:layout_width="@dimen/nvgd_drawer_width"
+        android:layout_height="match_parent"
+        android:background="@color/nvgd_drawer"
+        android:cacheColorHint="@color/nvgd_transparent"
+        android:divider="@color/nvgd_transparent"
+        android:dividerHeight="0dp"/>
+
+
+</android.support.v4.widget.DrawerLayout>
