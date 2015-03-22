@@ -1,10 +1,8 @@
 package com.github.larsus.nvgd.adapter;
 
 import com.github.larsus.nvgd.handler.OnActionItemClickListener;
-import com.github.larsus.nvgd.handler.OnItemClickListener;
 import com.github.larsus.nvgd.model.ActionModel;
 import com.github.larsus.nvgd.viewholder.BaseActionViewHolder;
-import com.github.larsus.nvgd.viewholder.BaseViewHolder;
 
 /**
  * @author Larsus
