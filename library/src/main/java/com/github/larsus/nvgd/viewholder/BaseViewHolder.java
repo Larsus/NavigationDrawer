@@ -11,7 +11,7 @@ import com.github.larsus.nvgd.model.BaseModel;
  */
 public abstract class BaseViewHolder<T extends BaseModel> {
 
-    T model;
+    protected T model;
 
     protected BaseViewHolder(View view, T model){
         this.model = model;

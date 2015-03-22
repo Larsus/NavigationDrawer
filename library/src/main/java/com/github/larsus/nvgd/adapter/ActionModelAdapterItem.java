@@ -11,7 +11,7 @@ import com.github.larsus.nvgd.viewholder.BaseActionViewHolder;
  */
 public class ActionModelAdapterItem<T extends ActionModel> extends ModelAdapterItem<T> {
 
-    private OnActionItemClickListener<T> onActionItemClickListener;
+    protected OnActionItemClickListener<T> onActionItemClickListener;
 
     public ActionModelAdapterItem(T actionModel, Class<? extends BaseActionViewHolder<T>> actionViewHolder,
                                   int layoutResourceId, OnActionItemClickListener<T> onActionItemClickListener) {

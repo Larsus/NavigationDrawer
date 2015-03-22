@@ -13,7 +13,7 @@ import com.github.larsus.nvgd.model.HeaderModel;
  */
 public class DefaultHeaderViewHolder extends BaseViewHolder<HeaderModel> {
 
-    TextView mTitle;
+    protected TextView mTitle;
 
     public DefaultHeaderViewHolder(View view, HeaderModel headerModel) {
         super(view, headerModel);

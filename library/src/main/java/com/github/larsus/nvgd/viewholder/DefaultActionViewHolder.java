@@ -16,8 +16,8 @@ import com.github.larsus.nvgd.model.ActionModel;
  */
 public class DefaultActionViewHolder extends BaseActionViewHolder<ActionModel> {
 
-    ImageView mIcon;
-    TextView mTitle;
+    protected ImageView mIcon;
+    protected TextView mTitle;
 
     public DefaultActionViewHolder(View view, ActionModel model) {
         super(view, model);

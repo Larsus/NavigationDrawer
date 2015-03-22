@@ -33,5 +33,11 @@ public class DefaultStateViewHolder extends BaseStateViewHolder<StateModel> {
     public void updateView() {
         checkBox.setChecked(model.getState());
         checkBox.setText(model.getTitle());
+
+        if (model.getState()) {
+            checkBox.setAlpha(1f);
+        } else {
+            checkBox.setAlpha(0.54f);
+        }
     }
 }

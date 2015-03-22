@@ -16,6 +16,7 @@ import com.github.larsus.nvgd.viewholder.BaseStateViewHolder;
 import com.github.larsus.nvgd.viewholder.BaseViewHolder;
 import com.github.larsus.nvgd.viewholder.ViewHolderBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -161,7 +162,7 @@ public final class ModelAdapter extends BaseAdapter {
                     stateViewHolder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            stateModelAdapterItem.getOnStateItemClickListener().OnStateItemClick(stateModel);
+                            stateModelAdapterItem.getOnStateItemClickListener().OnStateItemClick(stateModel, getStateModels(stateModel));
                             notifyDataSetChanged();
                         }
                     });
@@ -208,5 +209,20 @@ public final class ModelAdapter extends BaseAdapter {
 
             ((ActionModel)actionModelAdapterItem.model).deSelect();
         }
+    }
+
+    private List<? super StateModel> getStateModels(StateModel model) {
+        int listCount = mModelList.size();
+
+        List<BaseModel> models = new ArrayList<>();
+
+        for (int i = 0; i < listCount; i++) {
+            if (!(mModelList.get(i) instanceof StateModelAdapterItem)) continue;
+            if (((StateModelAdapterItem) mModelList.get(i)).model.equals(model)) continue;
+
+            models.add(((StateModelAdapterItem) mModelList.get(i)).model);
+        }
+
+        return models;
     }
 }

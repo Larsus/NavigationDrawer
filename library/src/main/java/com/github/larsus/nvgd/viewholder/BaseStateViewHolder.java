@@ -13,7 +13,7 @@ import com.github.larsus.nvgd.model.StateModel;
  */
 public abstract class BaseStateViewHolder<T extends StateModel> extends BaseViewHolder<T> {
 
-    CheckBox checkBox;
+    protected CheckBox checkBox;
 
     protected BaseStateViewHolder(View view, T stateModel) {
         super(view, stateModel);
