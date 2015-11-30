@@ -12,7 +12,7 @@ import com.github.larsus.nvgd.model.StateModel;
  * @version 1.0
  * @since 22.03.2015
  */
-public class DefaultStateViewHolder extends BaseStateViewHolder<StateModel> {
+public final class DefaultStateViewHolder extends BaseStateViewHolder<StateModel> {
 
     public DefaultStateViewHolder(View view, StateModel stateModel) {
         super(view, stateModel);

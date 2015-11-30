@@ -9,9 +9,9 @@ import com.github.larsus.nvgd.model.ActionModel;
  * @version 1.0
  * @since 15.03.2015
  */
-public abstract class BaseActionViewHolder<T extends ActionModel> extends BaseViewHolder<T> {
+public abstract class BaseActionViewHolder<TModel extends ActionModel> extends BaseViewHolder<TModel> {
 
-    protected BaseActionViewHolder(View view, T actionModel) {
+    protected BaseActionViewHolder(View view, TModel actionModel) {
         super(view, actionModel);
     }
 

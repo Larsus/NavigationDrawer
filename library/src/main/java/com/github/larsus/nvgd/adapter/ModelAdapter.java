@@ -92,12 +92,10 @@ public final class ModelAdapter extends BaseAdapter {
 
                 BaseViewHolder headerViewHolder;
 
-                HeaderModel headerModel = (HeaderModel) modelAdapterItem.model;
-
                 if (convertView == null) {
                     convertView = inflater.inflate(modelAdapterItem.layoutResourceId, parent, false);
-                    Class<? extends BaseViewHolder<HeaderModel>> viewHolderClass = modelAdapterItem.viewHolder;
-                    headerViewHolder = mViewHolderBuilder.build(convertView, headerModel, viewHolderClass);
+                    Class<? extends BaseViewHolder<? extends HeaderModel>> viewHolderClass = modelAdapterItem.viewHolder;
+                    headerViewHolder = mViewHolderBuilder.build(convertView, modelAdapterItem.model, viewHolderClass);
                     convertView.setTag(headerViewHolder);
                 }
                 else {
@@ -110,19 +108,17 @@ public final class ModelAdapter extends BaseAdapter {
 
                 BaseActionViewHolder actionViewHolder;
 
-                ActionModel actionModel = (ActionModel) modelAdapterItem.model;
-
                 if (convertView == null) {
                     convertView = inflater.inflate(modelAdapterItem.layoutResourceId, parent, false);
-                    Class<? extends BaseViewHolder<ActionModel>> viewHolderClass = modelAdapterItem.viewHolder;
-                    actionViewHolder = (BaseActionViewHolder) mViewHolderBuilder.build(convertView, actionModel, viewHolderClass);
+                    Class<? extends BaseViewHolder<? extends ActionModel>> viewHolderClass = modelAdapterItem.viewHolder;
+                    actionViewHolder = (BaseActionViewHolder) mViewHolderBuilder.build(convertView, modelAdapterItem.model, viewHolderClass);
                     convertView.setTag(actionViewHolder);
                 }
                 else {
                     actionViewHolder = (BaseActionViewHolder) convertView.getTag();
                     actionViewHolder.updateView();
                 }
-                if (actionModel.isSelected() && mShowSelectedState)
+                if (((ActionModel)modelAdapterItem.model).isSelected() && mShowSelectedState)
                     actionViewHolder.selectView(convertView);
                 else
                     actionViewHolder.deSelectView(convertView);
@@ -133,12 +129,10 @@ public final class ModelAdapter extends BaseAdapter {
 
                 BaseViewHolder separatorViewHolder;
 
-                SeparatorModel separatorModel = (SeparatorModel) modelAdapterItem.model;
-
                 if (convertView == null) {
                     convertView = inflater.inflate(modelAdapterItem.layoutResourceId, parent, false);
-                    Class<? extends BaseViewHolder<SeparatorModel>> viewHolderClass = modelAdapterItem.viewHolder;
-                    separatorViewHolder = mViewHolderBuilder.build(convertView, separatorModel, viewHolderClass);
+                    Class<? extends BaseViewHolder<? extends SeparatorModel>> viewHolderClass = modelAdapterItem.viewHolder;
+                    separatorViewHolder = mViewHolderBuilder.build(convertView, modelAdapterItem.model, viewHolderClass);
                     convertView.setTag(separatorViewHolder);
                 }
                 else {
@@ -151,14 +145,15 @@ public final class ModelAdapter extends BaseAdapter {
 
                 BaseStateViewHolder stateViewHolder;
 
-                final StateModel stateModel = (StateModel) modelAdapterItem.model;
-
                 final StateModelAdapterItem stateModelAdapterItem = (StateModelAdapterItem) modelAdapterItem;
 
                 if (convertView == null) {
                     convertView = inflater.inflate(modelAdapterItem.layoutResourceId, parent, false);
-                    Class<? extends BaseStateViewHolder<StateModel>> viewHolderClass = modelAdapterItem.viewHolder;
-                    stateViewHolder = mViewHolderBuilder.build(convertView, stateModel, viewHolderClass);
+                    Class<? extends BaseStateViewHolder<? extends StateModel>> viewHolderClass = modelAdapterItem.viewHolder;
+                    stateViewHolder = mViewHolderBuilder.build(convertView, modelAdapterItem.model, viewHolderClass);
+
+                    final StateModel stateModel = (StateModel) modelAdapterItem.model;
+
                     stateViewHolder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

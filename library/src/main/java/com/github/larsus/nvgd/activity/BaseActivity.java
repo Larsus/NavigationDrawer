@@ -15,6 +15,7 @@ import com.github.larsus.nvgd.R;
 import com.github.larsus.nvgd.adapter.ActionModelAdapterItem;
 import com.github.larsus.nvgd.adapter.ModelAdapter;
 import com.github.larsus.nvgd.adapter.ModelAdapterItem;
+import com.github.larsus.nvgd.adapter.ModelAdapterItems;
 import com.github.larsus.nvgd.viewholder.DefaultViewHolderBuilder;
 import com.github.larsus.nvgd.viewholder.ViewHolderBuilder;
 
@@ -50,10 +51,17 @@ public abstract class BaseActivity extends ActionBarActivity {
         loadCurrentPosition(savedInstanceState);
 
         final ActionBar actionBar = getSupportActionBar();
+
+        assert actionBar != null;
+
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        mModelAdapter = new ModelAdapter(this, getViewHolderBuilder(), getModelAdapterItems(), savePosition);
+        ModelAdapterItems modelAdapterItems = new ModelAdapterItems();
+
+        onInitModelAdapterItems(modelAdapterItems);
+
+        mModelAdapter = new ModelAdapter(this, getViewHolderBuilder(), modelAdapterItems.getModelAdapterItems(), savePosition);
         mModelAdapter.selectItem(mCurrentItemPosition);
 
         mDrawerList.setAdapter(mModelAdapter);
@@ -85,10 +93,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         return R.id.nvgd_drawer_items_list;
     }
 
-    private void loadCurrentPosition(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            setCurrentPosition(savedInstanceState.getInt(CURRENT_ITEM_POSITION));
-        }
+    protected abstract void onInitModelAdapterItems(ModelAdapterItems modelAdapterItems);
+
+    protected ViewHolderBuilder getViewHolderBuilder() {
+        return new DefaultViewHolderBuilder();
     }
 
     @Override
@@ -142,10 +150,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         this.mCurrentItemPosition = position;
     }
 
-    protected abstract List<? super ModelAdapterItem> getModelAdapterItems();
-
-    protected ViewHolderBuilder getViewHolderBuilder() {
-        return new DefaultViewHolderBuilder();
+    private void loadCurrentPosition(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            setCurrentPosition(savedInstanceState.getInt(CURRENT_ITEM_POSITION));
+        }
     }
 
     private class ActionItemClickListener implements ListView.OnItemClickListener {

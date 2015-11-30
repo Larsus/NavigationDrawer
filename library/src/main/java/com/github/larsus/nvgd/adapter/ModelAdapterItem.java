@@ -8,12 +8,12 @@ import com.github.larsus.nvgd.viewholder.BaseViewHolder;
  * @version 1.0
  * @since 15.03.2015
  */
-public class ModelAdapterItem<T extends BaseModel> {
+public class ModelAdapterItem<TModel extends BaseModel> {
     protected int layoutResourceId;
-    protected T model;
-    protected Class<? extends BaseViewHolder<T>> viewHolder;
+    protected TModel model;
+    protected Class<? extends BaseViewHolder<TModel>> viewHolder;
 
-    public ModelAdapterItem(T model, Class<? extends BaseViewHolder<T>> viewHolder, int layoutResourceId) {
+    public ModelAdapterItem(TModel model, Class<? extends BaseViewHolder<TModel>> viewHolder, int layoutResourceId) {
         this.model = model;
         this.viewHolder = viewHolder;
         this.layoutResourceId = layoutResourceId;

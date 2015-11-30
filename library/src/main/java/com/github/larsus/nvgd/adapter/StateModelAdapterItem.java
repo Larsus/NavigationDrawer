@@ -9,17 +9,17 @@ import com.github.larsus.nvgd.viewholder.BaseStateViewHolder;
  * @version 1.0
  * @since 21.03.2015
  */
-public class StateModelAdapterItem<T extends StateModel> extends ModelAdapterItem<T> {
+public class StateModelAdapterItem<TModel extends StateModel> extends ModelAdapterItem<TModel> {
 
-    protected OnStateItemClickListener<T> onStateItemClickListener;
+    protected OnStateItemClickListener<TModel> onStateItemClickListener;
 
-    public StateModelAdapterItem(T stateModel, Class<? extends BaseStateViewHolder<T>> stateViewHolder,
-                                 int layoutResourceId, OnStateItemClickListener<T> onStateItemClickListener) {
+    public StateModelAdapterItem(TModel stateModel, Class<? extends BaseStateViewHolder<TModel>> stateViewHolder,
+                                 int layoutResourceId, OnStateItemClickListener<TModel> onStateItemClickListener) {
         super(stateModel, stateViewHolder, layoutResourceId);
         this.onStateItemClickListener = onStateItemClickListener;
     }
 
-    public OnStateItemClickListener<T> getOnStateItemClickListener() {
+    public OnStateItemClickListener<TModel> getOnStateItemClickListener() {
         return onStateItemClickListener;
     }
 }

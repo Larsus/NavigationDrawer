@@ -19,8 +19,8 @@ public class DefaultViewHolderBuilder implements ViewHolderBuilder {
     private Map<Class<? extends BaseViewHolder<? extends BaseModel>>, Constructor<?>> typeCache = new ConcurrentHashMap<>();
 
     @Override
-    public <T extends BaseViewHolder<? extends BaseModel>> T build(View convertView, BaseModel baseModel, Class<T> type) {
-        BaseViewHolder baseViewHolder = null;
+    public <TViewHolder extends BaseViewHolder<? extends BaseModel>, TModel extends BaseModel> TViewHolder build(View convertView, TModel baseModel, Class<TViewHolder> type) {
+        TViewHolder baseViewHolder = null;
 
         Constructor<?> constructor = null;
 
@@ -38,7 +38,7 @@ public class DefaultViewHolderBuilder implements ViewHolderBuilder {
 
         try {
             assert constructor != null;
-            baseViewHolder = (BaseViewHolder) constructor.newInstance(convertView, baseModel);
+            baseViewHolder = (TViewHolder) constructor.newInstance(convertView, baseModel);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -47,7 +47,7 @@ public class DefaultViewHolderBuilder implements ViewHolderBuilder {
             e.printStackTrace();
         }
 
-        return (T) baseViewHolder;
+        return baseViewHolder;
     }
 
     @Override

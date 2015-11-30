@@ -11,7 +11,7 @@ import com.github.larsus.nvgd.model.HeaderModel;
  * @version 1.0
  * @since 15.03.2015
  */
-public class DefaultHeaderViewHolder extends BaseViewHolder<HeaderModel> {
+public final class DefaultHeaderViewHolder extends BaseViewHolder<HeaderModel> {
 
     protected TextView mTitle;
 

@@ -4,13 +4,14 @@ import com.github.larsus.nvgd.NavigationActivity;
 import com.github.larsus.nvgd.adapter.DefaultActionModelAdapterItem;
 import com.github.larsus.nvgd.adapter.DefaultHeaderModelAdapterItem;
 import com.github.larsus.nvgd.adapter.DefaultStateModelAdapterItem;
-import com.github.larsus.nvgd.adapter.ModelAdapterItem;
+import com.github.larsus.nvgd.adapter.ModelAdapterItems;
 import com.github.larsus.nvgd.handler.OnActionItemClickListener;
 import com.github.larsus.nvgd.handler.OnStateItemClickListener;
 import com.github.larsus.nvgd.model.ActionModel;
 import com.github.larsus.nvgd.model.StateModel;
+import com.larsus.navigationdrawer.demo.nvgd.adapter.ActionCountModelAdapterItem;
+import com.larsus.navigationdrawer.demo.nvgd.model.ActionCountModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,24 +27,25 @@ public class MainActivity extends NavigationActivity {
     }
 
     @Override
-    protected List<? super ModelAdapterItem> getModelAdapterItems() {
-
-        List<? super ModelAdapterItem> models = new ArrayList<>();
-
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.inbox, "Inbox", onActionItemClickListener));
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.grade, "Starred", onActionItemClickListener));
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.send, "Sent mail", onActionItemClickListener));
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.drafts, "Drafts", onActionItemClickListener));
-        models.add(new DefaultHeaderModelAdapterItem("Subheader"));
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.markunread, "All mail", onActionItemClickListener));
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.delete, "Trash", onActionItemClickListener));
-        models.add(new DefaultActionModelAdapterItem(R.mipmap.report, "Spam", onActionItemClickListener));
-        models.add(new DefaultHeaderModelAdapterItem("Settings"));
-        models.add(new DefaultStateModelAdapterItem(false, "State element1", onStateItemClickListener));
-        models.add(new DefaultStateModelAdapterItem(true, "State element2", onStateItemClickListener));
-        models.add(new DefaultStateModelAdapterItem(true, "State element3", onStateItemClickListener));
-
-        return models;
+    protected void onInitModelAdapterItems(ModelAdapterItems modelAdapterItems) {
+        modelAdapterItems
+                .add(new ActionCountModelAdapterItem(R.mipmap.inbox, "Inbox", 0, new OnActionItemClickListener<ActionCountModel>() {
+                    @Override
+                    public void OnActionItemClick(ActionCountModel model) {
+                        model.setCount(model.getCount() + 1);
+                    }
+                }))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.grade, "Starred", onActionItemClickListener))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.send, "Sent mail", onActionItemClickListener))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.drafts, "Drafts", onActionItemClickListener))
+                .add(new DefaultHeaderModelAdapterItem("Subheader"))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.markunread, "All mail", onActionItemClickListener))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.delete, "Trash", onActionItemClickListener))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.report, "Spam", onActionItemClickListener))
+                .add(new DefaultHeaderModelAdapterItem("Settings"))
+                .add(new DefaultStateModelAdapterItem(false, "State element1", onStateItemClickListener))
+                .add(new DefaultStateModelAdapterItem(true, "State element2", onStateItemClickListener))
+                .add(new DefaultStateModelAdapterItem(true, "State element3", onStateItemClickListener));
     }
 
     OnStateItemClickListener<StateModel> onStateItemClickListener = new OnStateItemClickListener<StateModel>() {

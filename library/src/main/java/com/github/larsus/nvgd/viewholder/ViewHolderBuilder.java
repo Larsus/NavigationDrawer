@@ -10,5 +10,5 @@ import com.github.larsus.nvgd.model.BaseModel;
  * @since 15.03.2015
  */
 public interface ViewHolderBuilder {
-    <T extends BaseViewHolder<? extends BaseModel>> T build(View convertView, BaseModel baseModel, Class<T> type);
+    <TViewHolder extends BaseViewHolder<? extends BaseModel>, TModel extends BaseModel> TViewHolder build(View convertView, TModel baseModel, Class<TViewHolder> type);
 }

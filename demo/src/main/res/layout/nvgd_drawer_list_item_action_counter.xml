@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="?android:selectableItemBackground"
+    android:gravity="start|center_vertical"
+    android:paddingLeft="@dimen/nvgd_keyline_1"
+    android:paddingRight="@dimen/nvgd_keyline_1"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nvgd_item_height">
+
+    <ImageView
+        android:id="@+id/nvg_drawer_item_icon"
+        android:layout_height="@dimen/nvgd_item_img_height"
+        android:layout_width="@dimen/nvgd_item_img_width"
+        android:alpha="0.54" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/nvg_drawer_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginLeft="@dimen/nvgd_keyline_2_minus_16dp_minus_img_width"
+            android:gravity="start|center_vertical"
+            android:textSize="@dimen/nvgd_default_textSize"
+            android:textColor="@color/nvgd_black"
+            android:alpha="0.87"/>
+
+        <TextView
+            android:id="@+id/nvg_drawer_item_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="end"
+            android:textSize="@dimen/nvgd_default_textSize"
+            android:textColor="@color/nvgd_black"
+            android:alpha="0.87"/>
+    </FrameLayout>
+
+
+</LinearLayout>
