@@ -31,7 +31,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     private static final String CURRENT_ITEM_POSITION = "nvgd.current.item.position";
 
     private DrawerLayout mDrawerLayout;
-
+    private View mDrawerView;
     private ListView mDrawerList;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -41,17 +41,22 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     protected void onCreate(Bundle savedInstanceState, boolean savePosition) {
         super.onCreate(savedInstanceState);
+        loadCurrentPosition(savedInstanceState);
 
         setContentView(getActivityLayoutResourceId());
 
         mDrawerLayout = (DrawerLayout) findViewById(getDrawerLayoutResourceId());
+        assert mDrawerLayout != null;
+
+        mDrawerView = findViewById(getDrawerViewResourceId());
+        assert mDrawerList != null;
+
         mDrawerList = (ListView) findViewById(getDrawerListResourceId());
+        assert mDrawerList != null;
+
         mDrawerList.setOnItemClickListener(new ActionItemClickListener());
 
-        loadCurrentPosition(savedInstanceState);
-
         final ActionBar actionBar = getSupportActionBar();
-
         assert actionBar != null;
 
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -89,6 +94,8 @@ public abstract class BaseActivity extends ActionBarActivity {
         return R.id.nvgd_drawer;
     }
 
+    protected int getDrawerViewResourceId() { return R.id.nvgd_drawer_items_list; }
+
     protected int getDrawerListResourceId() {
         return R.id.nvgd_drawer_items_list;
     }
@@ -121,10 +128,10 @@ public abstract class BaseActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home: {
-                if (mDrawerLayout.isDrawerOpen(mDrawerList)){
-                    mDrawerLayout.closeDrawer(mDrawerList);
+                if (mDrawerLayout.isDrawerOpen(mDrawerView)){
+                    mDrawerLayout.closeDrawer(mDrawerView);
                 } else {
-                    mDrawerLayout.openDrawer(mDrawerList);
+                    mDrawerLayout.openDrawer(mDrawerView);
                 }
                 return true;
             }
@@ -134,9 +141,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerView);
         if (drawerOpen) {
-            mDrawerLayout.closeDrawer(mDrawerList);
+            mDrawerLayout.closeDrawer(mDrawerView);
         } else {
             super.onBackPressed();
         }
