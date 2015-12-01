@@ -32,10 +32,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     private DrawerLayout mDrawerLayout;
     private View mDrawerView;
-    private ListView mDrawerList;
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private ModelAdapter mModelAdapter;
 
     private int mCurrentItemPosition = 0;
 
@@ -47,15 +45,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         setContentView(getActivityLayoutResourceId());
 
         mDrawerLayout = (DrawerLayout) findViewById(getDrawerLayoutResourceId());
-        assert mDrawerLayout != null;
-
         mDrawerView = findViewById(getDrawerViewResourceId());
-        assert mDrawerList != null;
-
-        mDrawerList = (ListView) findViewById(getDrawerListResourceId());
-        assert mDrawerList != null;
-
-        mDrawerList.setOnItemClickListener(new ActionItemClickListener());
 
         final ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -63,15 +53,8 @@ public abstract class BaseActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        ModelAdapterItems modelAdapterItems = new ModelAdapterItems();
-
-        onInitModelAdapterItems(modelAdapterItems);
-
-        mModelAdapter = new ModelAdapter(this, getViewHolderBuilder(), modelAdapterItems.getModelAdapterItems(), getSaveItemPositionState() == SaveItemPositionState.SAVE);
-        mModelAdapter.selectItem(mCurrentItemPosition);
-
-        mDrawerList.setAdapter(mModelAdapter);
-        mDrawerList.setOnItemClickListener(new ActionItemClickListener());
+        initDrawerList();
+        initDrawerFooterList();
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.nvgd_drawer_open, R.string.nvgd_drawer_close){
             public void onDrawerClosed(View v){
@@ -89,6 +72,35 @@ public abstract class BaseActivity extends ActionBarActivity {
         mDrawerToggle.syncState();
     }
 
+    private void initDrawerList() {
+        final ModelAdapterItems modelAdapterItems = new ModelAdapterItems();
+
+        onInitModelAdapterItems(modelAdapterItems);
+
+        final ModelAdapter modelAdapter = new ModelAdapter(this, getViewHolderBuilder(), modelAdapterItems.getModelAdapterItems(), getSaveItemPositionState() == SaveItemPositionState.SAVE);
+
+        final ListView drawerList = (ListView) findViewById(getDrawerListResourceId());
+        drawerList.setAdapter(modelAdapter);
+        drawerList.setOnItemClickListener(new ActionItemClickListener(modelAdapter));
+
+        modelAdapter.selectItem(mCurrentItemPosition);
+    }
+
+    private void initDrawerFooterList() {
+        final ModelAdapterItems footerModelAdapterItems = new ModelAdapterItems();
+
+        onInitFooterModelAdapterItems(footerModelAdapterItems);
+
+        if (footerModelAdapterItems.getModelAdapterItems().size() == 0)
+            return;
+
+        final ModelAdapter footerModelAdapter = new ModelAdapter(this, getViewHolderBuilder(), footerModelAdapterItems.getModelAdapterItems(), false);
+
+        final ListView mDrawerFooterList = (ListView) findViewById(getDrawerFooterListResourceId());
+        mDrawerFooterList.setAdapter(footerModelAdapter);
+        mDrawerFooterList.setOnItemClickListener(new ActionItemClickListener(footerModelAdapter));
+    }
+
     protected abstract SaveItemPositionState getSaveItemPositionState();
 
     protected abstract int getActivityLayoutResourceId();
@@ -103,7 +115,12 @@ public abstract class BaseActivity extends ActionBarActivity {
         return R.id.nvgd_drawer_items_list;
     }
 
+    protected int getDrawerFooterListResourceId() { return R.id.nvgd_drawer_footer_items_list; }
+
     protected abstract void onInitModelAdapterItems(ModelAdapterItems modelAdapterItems);
+
+    protected void onInitFooterModelAdapterItems(ModelAdapterItems modelAdapterItems) {
+    }
 
     protected ViewHolderBuilder getViewHolderBuilder() {
         return new DefaultViewHolderBuilder();
@@ -168,18 +185,24 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     private class ActionItemClickListener implements ListView.OnItemClickListener {
 
+        private final ModelAdapter modelAdapter;
+
+        public ActionItemClickListener(ModelAdapter modelAdapter) {
+            this.modelAdapter = modelAdapter;
+        }
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (mModelAdapter == null || !(mModelAdapter.getItem(position) instanceof ActionModelAdapterItem)) return;
+            if (modelAdapter == null || !(modelAdapter.getItem(position) instanceof ActionModelAdapterItem)) return;
 
-            ActionModelAdapterItem actionModelAdapterItem = (ActionModelAdapterItem) mModelAdapter.getItem(position);
-            actionModelAdapterItem.onActionItemClick(mModelAdapter);
+            ActionModelAdapterItem actionModelAdapterItem = (ActionModelAdapterItem) modelAdapter.getItem(position);
+            actionModelAdapterItem.onActionItemClick(modelAdapter);
 
-            if (mCurrentItemPosition != position && mModelAdapter.selectItem(position)) {
+            if (mCurrentItemPosition != position && modelAdapter.selectItem(position)) {
                 setCurrentPosition(position);
             }
 
-            mDrawerLayout.closeDrawer(mDrawerList);
+            mDrawerLayout.closeDrawer(mDrawerView);
         }
     }
 

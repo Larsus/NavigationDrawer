@@ -180,6 +180,7 @@ public final class ModelAdapter extends BaseAdapter {
     }
 
     public boolean selectItem(int position) {
+        if (!mShowSelectedState) return false;
         if (position < 0) return false;
         if (position > mModelList.size() - 1) return false;
         if (!(mModelList.get(position) instanceof ActionModelAdapterItem)) return false;
