@@ -9,6 +9,6 @@ import java.util.List;
  * @version 1.0
  * @since 22.03.2015
  */
-public interface OnStateItemClickListener<T extends StateModel> {
-    void OnStateItemClick(T model, List<? extends StateModel> models);
+public interface OnStateItemClickListener<TModel extends StateModel> {
+    void OnStateItemClick(TModel model, List<? extends StateModel> models);
 }

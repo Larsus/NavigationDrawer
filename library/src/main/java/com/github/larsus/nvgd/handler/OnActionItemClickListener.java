@@ -7,6 +7,6 @@ import com.github.larsus.nvgd.model.ActionModel;
  * @version 1.0
  * @since 15.03.2015
  */
-public interface OnActionItemClickListener<T extends ActionModel> {
-    void OnActionItemClick(T model);
+public interface OnActionItemClickListener<TModel extends ActionModel> {
+    void OnActionItemClick(TModel model);
 }

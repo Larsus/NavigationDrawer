@@ -9,11 +9,11 @@ import com.github.larsus.nvgd.model.BaseModel;
  * @version 1.0
  * @since 15.03.2015
  */
-public abstract class BaseViewHolder<T extends BaseModel> {
+public abstract class BaseViewHolder<TModel extends BaseModel> {
 
-    protected T model;
+    protected TModel model;
 
-    protected BaseViewHolder(View view, T model){
+    protected BaseViewHolder(View view, TModel model){
         this.model = model;
         injectViews(view);
         updateView();
