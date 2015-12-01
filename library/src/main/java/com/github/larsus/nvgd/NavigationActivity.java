@@ -13,6 +13,11 @@ public abstract class NavigationActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected final SaveItemPositionState getSaveItemPositionState() {
+        return SaveItemPositionState.SAVE;
     }
 }

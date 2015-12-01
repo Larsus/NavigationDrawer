@@ -39,7 +39,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     private int mCurrentItemPosition = 0;
 
-    protected void onCreate(Bundle savedInstanceState, boolean savePosition) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadCurrentPosition(savedInstanceState);
 
@@ -66,7 +67,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         onInitModelAdapterItems(modelAdapterItems);
 
-        mModelAdapter = new ModelAdapter(this, getViewHolderBuilder(), modelAdapterItems.getModelAdapterItems(), savePosition);
+        mModelAdapter = new ModelAdapter(this, getViewHolderBuilder(), modelAdapterItems.getModelAdapterItems(), getSaveItemPositionState() == SaveItemPositionState.SAVE);
         mModelAdapter.selectItem(mCurrentItemPosition);
 
         mDrawerList.setAdapter(mModelAdapter);
@@ -87,6 +88,8 @@ public abstract class BaseActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
     }
+
+    protected abstract SaveItemPositionState getSaveItemPositionState();
 
     protected abstract int getActivityLayoutResourceId();
 
@@ -178,5 +181,10 @@ public abstract class BaseActivity extends ActionBarActivity {
 
             mDrawerLayout.closeDrawer(mDrawerList);
         }
+    }
+
+    public enum SaveItemPositionState {
+        SAVE,
+        DO_NOT_SAVE
     }
 }

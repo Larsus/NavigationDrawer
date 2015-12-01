@@ -13,6 +13,11 @@ public abstract class LeftMenuActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, false);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected final SaveItemPositionState getSaveItemPositionState() {
+        return SaveItemPositionState.DO_NOT_SAVE;
     }
 }
