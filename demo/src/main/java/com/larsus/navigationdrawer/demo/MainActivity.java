@@ -29,7 +29,7 @@ public class MainActivity extends NavigationActivity {
     @Override
     protected void onInitModelAdapterItems(ModelAdapterItems modelAdapterItems) {
         modelAdapterItems
-                .add(new ActionCountModelAdapterItem(R.mipmap.inbox, "Inbox", 0, new OnActionItemClickListener<ActionCountModel>() {
+                .add(new ActionCountModelAdapterItem(R.mipmap.inbox, "Inbox", 15, new OnActionItemClickListener<ActionCountModel>() {
                     @Override
                     public void OnActionItemClick(ActionCountModel model) {
                         model.setCount(model.getCount() + 1);
@@ -42,10 +42,22 @@ public class MainActivity extends NavigationActivity {
                 .add(new DefaultActionModelAdapterItem(R.mipmap.markunread, "All mail", onActionItemClickListener))
                 .add(new DefaultActionModelAdapterItem(R.mipmap.delete, "Trash", onActionItemClickListener))
                 .add(new DefaultActionModelAdapterItem(R.mipmap.report, "Spam", onActionItemClickListener))
-                .add(new DefaultHeaderModelAdapterItem("Settings"))
+                .add(new DefaultHeaderModelAdapterItem("Params"))
                 .add(new DefaultStateModelAdapterItem(false, "State element1", onStateItemClickListener))
                 .add(new DefaultStateModelAdapterItem(true, "State element2", onStateItemClickListener))
                 .add(new DefaultStateModelAdapterItem(true, "State element3", onStateItemClickListener));
+    }
+
+    @Override
+    protected void onInitFooterModelAdapterItems(ModelAdapterItems modelAdapterItems) {
+        modelAdapterItems
+                .add(new DefaultActionModelAdapterItem(R.mipmap.settings, "Settings", onActionItemClickListener))
+                .add(new DefaultActionModelAdapterItem(R.mipmap.help, "Help", onActionItemClickListener));
+    }
+
+    @Override
+    protected int getDrawerViewResourceId() {
+        return com.github.larsus.nvgd.R.id.nvgd_drawer_layout;
     }
 
     OnStateItemClickListener<StateModel> onStateItemClickListener = new OnStateItemClickListener<StateModel>() {

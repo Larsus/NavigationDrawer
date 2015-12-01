@@ -5,6 +5,6 @@
     tools:context=".MyActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/nvgd_drawer_layout"/>
+    <include layout="@layout/nvgd_drawer_layout_with_footer"/>
 
 </LinearLayout>
